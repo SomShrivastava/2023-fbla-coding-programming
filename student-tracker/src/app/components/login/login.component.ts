@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
     
   }
 
+  // log in with google
   googleAuthLogin() {
     this.authService.googleAuthLogin();
   }

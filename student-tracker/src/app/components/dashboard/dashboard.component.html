@@ -5,27 +5,34 @@
             <img [src]="user.pfp" [alt]="user.name" class="d-block rounded"
                 style="margin-right: 1rem;">
             <div>
+                <!-- user name -->
                 <h2 class="mb-2">
                     {{user.name}}
                 </h2>
+                <!-- user points -->
                 <h4 class="mb-2">
                     {{user.points}} Points
                 </h4>
+                <!-- school id and grade -->
                 <h6>
                     {{user.schoolId}} - G{{user.grade}}
                 </h6>
             </div>
         </div>
+        <!-- navbar -->
         <div class="navigation d-flex flex-row align-items-center
             justify-content-start mb-4">
+            <!-- dashboard button -->
             <button pButton (click)="currentTab= 'Dashboard'" label="Dashboard"
                 [class.p-button-secondary]="currentTab == 'Leaderboard'"
                 style="margin-right: 1rem;"></button>
+            <!-- leaderboard button -->
             <button pButton (click)="currentTab= 'Leaderboard'"
                 label="Leaderboard" [class.p-button-secondary]="currentTab ==
                 'Dashboard'"></button>
         </div>
         <div class="dashboard" *ngIf="currentTab == 'Dashboard'">
+            <!-- dashboard table -->
             <p-table [value]="user.events" dataKey="id">
                 <ng-template pTemplate="header">
                     <tr>
@@ -85,6 +92,7 @@
             </p-table>
         </div>
         <div class="leaderboard" *ngIf="currentTab == 'Leaderboard'">
+            <!-- leaderboard table -->
             <p-table [value]="users" dataKey="id">
                 <ng-template pTemplate="header">
                     <tr>
@@ -125,6 +133,7 @@
                     <tr>
                         <td colspan="7">
                             <div class="p-3">
+                                <!-- nested dashboard table -->
                                 <p-table [value]="user.events" dataKey="id">
                                     <ng-template pTemplate="header">
                                         <tr>
@@ -174,7 +183,6 @@
                                         </tr>
                                     </ng-template>
                                 </p-table>
-
                             </div>
                         </td>
                     </tr>
@@ -183,12 +191,16 @@
         </div>
     </div>
     <div class="section2">
+        <!-- past winners -->
         <ng-container *ngFor="let object of history">
             <div class="mb-4">
+                <!-- quarter and year -->
                 <h2 class="mb-3">{{object["date"].split("-")[0].toUpperCase()}} - {{object["date"].split("-")[1]}}</h2>
                 <h5 class="bold">Top Winner</h5>
+                <!-- top winner name and prize -->
                 <p class="mb-3">{{getUserName(object["topWinner"]["id"])}} - {{object["topWinner"]["prize"]}}</p>
                 <h5 class="bold">Random Winner</h5>
+                <!-- random winner name and prize -->
                 <p>{{getUserName(object["randomWinner"]["id"])}} - {{object["randomWinner"]["prize"]}}</p>
             </div>
             <hr>

@@ -22,10 +22,12 @@ export class SignupComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    // load user from auth service
     this.authService.user.pipe(takeUntil(this.destroy$)).subscribe((user) => {
       if (user.id) {
         this.user = user;
       } else {
+        // if the user is not initialized in auth service, take user to login page
         this.router.navigate(["login"]);
         this.messageService.add({ severity: 'error', summary: 'Sign Up', detail: 'There was an error loading your details, log in again' });
       }
@@ -37,8 +39,11 @@ export class SignupComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
+  // validate form and then update the user after submission
   onSubmit() {
+    // check if the user entered the grade
     if (this.user.grade) {
+      // check if the user entered the school id
       if (this.user.schoolId.length > 0) {
         this.authService.addNewUser(this.user);
       } else {
