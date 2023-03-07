@@ -1,4 +1,4 @@
- <div *ngIf="user" class="screen">
+ <div *ngIf="user && users" class="screen">
     <div class="section1">
         <div class="d-flex flex-row align-items-center justify-content-start
             mb-4">
@@ -183,6 +183,15 @@
         </div>
     </div>
     <div class="section2">
-
+        <ng-container *ngFor="let object of history">
+            <div class="mb-4">
+                <h2 class="mb-3">{{object["date"].split("-")[0].toUpperCase()}} - {{object["date"].split("-")[1]}}</h2>
+                <h5 class="bold">Top Winner</h5>
+                <p class="mb-3">{{getUserName(object["topWinner"]["id"])}} - {{object["topWinner"]["prize"]}}</p>
+                <h5 class="bold">Random Winner</h5>
+                <p>{{getUserName(object["randomWinner"]["id"])}} - {{object["randomWinner"]["prize"]}}</p>
+            </div>
+            <hr>
+        </ng-container>
     </div>
 </div>

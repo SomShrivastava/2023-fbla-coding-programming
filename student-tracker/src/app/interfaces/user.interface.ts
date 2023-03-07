@@ -5,6 +5,7 @@ export interface User {
     name: string,
     email: string,
     pfp: string,
+    quarter?: string,
     grade?: number,
     schoolId?: string,
     points?: number,

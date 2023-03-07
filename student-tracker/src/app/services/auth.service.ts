@@ -15,12 +15,26 @@ import { Timestamp } from "firebase/firestore";
 export class AuthService {
   user = new BehaviorSubject<User>({} as User);
 
+  quarter: string;
+
   constructor(
     private afAuth: AngularFireAuth,
     private db: AngularFirestore,
     private messageService: MessageService,
     private router: Router
-  ) { }
+  ) {
+    let today = Timestamp.now().toMillis();
+
+    if (today >= Constants.q1initial && today <= Constants.q1final) {
+      this.quarter = "q1";
+    } else if (today >= Constants.q2initial && today <= Constants.q2final) {
+      this.quarter = "q2";
+    } else if (today >= Constants.q3initial && today <= Constants.q3final) {
+      this.quarter = "q3";
+    } else if (today >= Constants.q4initial && today <= Constants.q4final) {
+      this.quarter = "q4";
+    }
+  }
 
   // runs auth providers
   googleAuthLogin() {
@@ -41,15 +55,22 @@ export class AuthService {
       email: result.user.email,
       pfp: result.user.photoURL,
       points: 0,
-      events: Constants.EVENTS.q1
+      quarter: this.quarter,
+      events: Constants.EVENTS[this.quarter]
     };
     this.db.collection("users").doc(result.user.uid).ref.get()
       .then((doc) => {
         if (doc.exists) {
           user = doc.data() as User;
+          if (user.quarter != this.quarter) {
+            user.points = 0;
+            user.quarter = this.quarter;
+            user.events = Constants.EVENTS[this.quarter]
+            this.db.collection("users").doc(user.id).set(user);
+            this.user.next(user);
+          };
           this.messageService.add({ severity: 'success', summary: 'Login', detail: 'You have successfully logged in' });
           this.router.navigateByUrl(`dashboard?userId=${user.id}`);
-          this.user.next(user);
         } else {
           this.router.navigateByUrl("signup");
           this.user.next(user);

@@ -1,4 +1,20 @@
+import { Timestamp } from "firebase/firestore";
+
 export class Constants {
+    public static readonly prizes = [
+        "Lunch With Principal",
+        "Homework Pass",
+        "EB Hoodie"
+    ];
+
+    public static readonly q1initial = Timestamp.fromDate(new Date(new Date().getFullYear(), 8, 6)).toMillis();
+    public static readonly q1final = Timestamp.fromDate(new Date(new Date().getFullYear(), 10, 15)).toMillis();
+    public static readonly q2initial = Timestamp.fromDate(new Date(new Date().getFullYear(), 10, 16)).toMillis();
+    public static readonly q2final = Timestamp.fromDate(new Date(new Date().getFullYear(), 0, 30)).toMillis();
+    public static readonly q3initial = Timestamp.fromDate(new Date(new Date().getFullYear(), 0, 31)).toMillis();
+    public static readonly q3final = Timestamp.fromDate(new Date(new Date().getFullYear(), 3, 10)).toMillis();
+    public static readonly q4initial = Timestamp.fromDate(new Date(new Date().getFullYear(), 3, 11)).toMillis();
+    public static readonly q4final = Timestamp.fromDate(new Date(new Date().getFullYear(), 5, 19)).toMillis();
     public static readonly EVENTS = {
         q1: [
             {
