@@ -1,0 +1,31 @@
+<div class="screen">
+    <p-card header="Sign Up" [style]="{'width': '30rem'}">
+        <form>
+            <div class="field">
+                <img class="mb-2" [src]="user.pfp" [alt]="user.name">
+            </div>
+            <div class="field mb-2">
+                <label for="name" class="block mb-2">Username</label>
+                <input name="name" id="name" type="text" pInputText
+                    [(ngModel)]="user.name" readonly/>
+            </div>
+            <div class="field mb-2">
+                <label for="email" class="block mb-2">Email</label>
+                <input name="email" id="email" type="email" pInputText
+                    [(ngModel)]="user.email" readonly/>
+            </div>
+            <div class="field mb-2">
+                <label for="idnumber" class="block mb-2">ID Number</label>
+                <input name="idnumber" id="idnumber" type="text" pInputText
+                    [(ngModel)]="user.schoolId"/>
+            </div>
+            <div class="field mb-2">
+                <label for="grade" class="block mb-2">Grade</label>
+                <p-dropdown name="grade" [options]="[10, 11, 12]" optionLabel="grade" optionValue="" optionLabel="" [(ngModel)]="user.grade" placeholder="Select a grade" [showClear]="true"></p-dropdown>
+            </div>
+            <div class="field d-flex flex-row justify-content-end">
+                <p-button (click)="onSubmit()" label="Submit"></p-button>
+            </div>
+        </form>
+    </p-card>
+</div>

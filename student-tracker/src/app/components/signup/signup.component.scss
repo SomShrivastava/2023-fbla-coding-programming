@@ -4,4 +4,12 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    & img {
+        border-radius: 0.5rem;
+    }
+
+    & input {
+        width: 100%;
+    }
 }

@@ -1,0 +1,21 @@
+.screen {
+    min-height: 100vh;
+    max-height: 100vh;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+
+    & .section1 {
+        padding: 2rem;
+        min-width: 75%;
+        max-width: 75%;
+    }
+
+    & .section2 {
+        padding: 2rem;
+        min-width: 25%;
+        max-width: 25%;
+    }
+
+}
